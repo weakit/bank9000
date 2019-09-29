@@ -28,9 +28,9 @@ if __name__ == '__main__':
     print("border detection tests")
     print("width: ", width, "height: ", height)
     time.sleep(1)
-    print(t.overlay(t.line_border(), t.centre_text("\nHello world."), t.centre_text("\n\n" + logos.screen)))
+    print(t.overlay(t.line_border(), t.centre_text("\nHello world."), t.centre_text("\n\n" + logos.screen)), end='')
     time.sleep(3)
     clear()
-    print(t.overlay(t.line_border(), t.line_border(20, 10), t.line_border(10, 20)))
+    print(t.overlay(t.line_border(), t.line_border(20, 10), t.line_border(10, 20)), end='')
     time.sleep(1)
     clear()  # clear on exit
