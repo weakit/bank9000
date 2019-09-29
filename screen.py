@@ -28,6 +28,7 @@ if __name__ == '__main__':
     print("border detection tests")
     print("width: ", width, "height: ", height)
     time.sleep(1)
+    clear()
     print(t.overlay(t.line_border(), t.centre_text("\nHello world."), t.centre_text("\n\n" + logos.screen)), end='')
     time.sleep(3)
     clear()
