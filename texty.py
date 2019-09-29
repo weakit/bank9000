@@ -49,3 +49,14 @@ def overlay(base, *layers):
         for n, line in enumerate(layer):
             base_lines[n] = overlay_line(base_lines[n], line)
     return "".join(base_lines)
+
+
+def centre_text(text, w=None):
+    if not w:
+        w = width
+    text = text.split('\n')
+    sl = len(max(text, key=len))
+    spaces = ' ' * (width // 2 - sl // 2)
+    text = [spaces + x + '\n' for x in text]
+    return "".join(text)[:-1]  # remove last \n
+

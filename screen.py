@@ -16,8 +16,9 @@ def clear():
 
 if __name__ == '__main__':
     import time
-    import texty
-    texty.size(width, height)
+    import texty as t
+    import logos
+    t.size(width, height)
     print("screen clear test")
     time.sleep(1)
     clear()
@@ -27,9 +28,9 @@ if __name__ == '__main__':
     print("border detection tests")
     print("width: ", width, "height: ", height)
     time.sleep(1)
-    print(texty.line_border())
-    time.sleep(1)
+    print(t.overlay(t.line_border(), t.centre_text("\nHello world."), t.centre_text("\n\n" + logos.screen)))
+    time.sleep(3)
     clear()
-    print(texty.overlay(texty.line_border(), texty.line_border(20, 10), texty.line_border(10, 20)))
+    print(t.overlay(t.line_border(), t.line_border(20, 10), t.line_border(10, 20)))
     time.sleep(1)
     clear()  # clear on exit
