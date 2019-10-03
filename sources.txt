@@ -1,0 +1,14 @@
+Buffered and unbuffered IO in Python:
+    https://eulertech.wordpress.com/2017/10/30/sys-out-flush-in-python/
+
+Getting Terminal Size in Python:
+    http://granitosaurus.rocks/getting-terminal-size.html
+
+Working with JSON data in Python:
+    https://realpython.com/python-json/
+
+Python Docs:
+    https://docs.python.org/3.7/library/functools.html
+    http://docs.python.org/3.7/library/base64.html
+    https://docs.python.org/3/library/hashlib.html
+

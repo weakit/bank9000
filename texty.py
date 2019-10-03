@@ -19,7 +19,7 @@ def size(w, h):
     width, height = w, h
 
 
-def line_border(w=None, h=None):
+def border(w=None, h=None):
     if not w or not h:
         w, h = width, height
     top = lft + (hor * (w - 2)) + rgt
@@ -51,7 +51,7 @@ def overlay(base, *layers):
     return "".join(base_lines)
 
 
-def centre_text(text, w=None):
+def center(text, w=None):
     if not w:
         w = width
     text = text.split('\n')
@@ -60,3 +60,24 @@ def centre_text(text, w=None):
     text = [spaces + x + '\n' for x in text]
     return "".join(text)[:-1]  # remove last \n
 
+
+def ra(text, sp=2, w=None):
+    return ' ' * (width - len(text) - sp - 1) + text
+
+
+def la(text, sp=2, w=None):
+    return ' ' * (sp + 1) + text
+
+
+def ln(string, n):
+    if n > 0:
+        if n > height - 2:
+            return string  # Throw console size error
+        else:
+            return '\n' * (height + 1) + string
+    if n < 0:
+        if abs(n) > height - 2:
+            return  string  # Throw console size error
+        else:
+            return '\n' * (height + n - 1) + string
+    return string
