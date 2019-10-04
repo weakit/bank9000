@@ -38,7 +38,7 @@ if __name__ == '__main__':
     print("width: ", width, "height: ", height)
     time.sleep(1)
     clear()
-    print(t.overlay(t.border(), t.center("\nHello world."), t.center("\n\n" + 'logos.screen')), end='')
+    print(t.overlay(t.border(), t.ca("\nHello world."), t.ca("\n\n" + 'logos.screen')), end='')
     move()
     time.sleep(3)
     clear()

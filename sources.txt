@@ -7,6 +7,9 @@ Getting Terminal Size in Python:
 Working with JSON data in Python:
     https://realpython.com/python-json/
 
+User defined exceptions:
+    https://www.geeksforgeeks.org/user-defined-exceptions-python-examples/
+
 Python Docs:
     https://docs.python.org/3.7/library/functools.html
     http://docs.python.org/3.7/library/base64.html
