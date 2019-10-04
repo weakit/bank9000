@@ -10,6 +10,12 @@ Working with JSON data in Python:
 User defined exceptions:
     https://www.geeksforgeeks.org/user-defined-exceptions-python-examples/
 
+ord:
+    https://www.geeksforgeeks.org/ord-function-python/
+
+Nonlocal:
+    https://www.codesdope.com/blog/article/nested-function-scope-of-variable-closures-in-pyth/
+
 Python Docs:
     https://docs.python.org/3.7/library/functools.html
     http://docs.python.org/3.7/library/base64.html
