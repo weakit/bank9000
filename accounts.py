@@ -9,7 +9,7 @@ import random
 default = {
     'name': 'Account Name',
     'age': 0,
-    'username': 'user',
+    'user': 'user',
     'pass': '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',
     'balance': 0,
     'loan': [],
@@ -67,6 +67,11 @@ def write():
     f.close()
 
 
+def available(n):
+    read()
+    return n not in users.keys()
+
+
 def make_account_low(name, user, password):
     ac = default
     ac['name'] = name
@@ -108,6 +113,12 @@ def check_pass(n, password):
     if accounts[n]['pass'] == hashlib.sha256(password.encode()).hexdigest():
         return True
     return False
+
+
+def get_account(n):
+    read()
+    n = find(n)
+    return accounts[n]
 
 
 def get_balance(n):

@@ -115,6 +115,43 @@ def simple_input(heading, prompt):
     return x
 
 
+def input_form(heading, types, prompts, *lines):
+    inputs = []
+    lines = list(lines)
+    if lines:
+        lines.append('')
+    for x in types:
+        inputs.append((x, None))
+    for i, x in enumerate(inputs):
+        done = False
+        ask_int = False
+        while not done:
+            s = make_list(heading, lines + prompts)
+            screen.clear()
+            screen.print(s)
+            if ask_int:
+                screen.move(0, -1)
+                screen.print(" Please enter a numeric value.")
+            screen.move(len(prompts[i]) + 6, 14 + len(lines) + i)
+            inp = input().strip()
+            if x[0] == 'n':
+                try:
+                    inputs[i] = (x[0], float(inp))
+                except ValueError:
+                    ask_int = True
+                    continue
+            else:
+                inputs[i] = (x[0], inp)
+            prompts[i] += ' ' + inp
+            done = True
+    return [x[1] for x in inputs]
+
+
+def display_info(heading, *lines):
+    screen.clear()
+    screen.print(make_list(heading, lines))
+
+
 def finish():
     screen.clear()
     random.seed(time.time())
@@ -150,4 +187,6 @@ def process(thing_type, heading, thing):
 
 
 if __name__ == '__main__':
-    pass
+    init()
+    x = input_form('head', 'ns', ['h1', 'h2'])
+    print(x)
