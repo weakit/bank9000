@@ -75,7 +75,7 @@ def available(n):
 def make_account_low(name, user, password):
     ac = default
     ac['name'] = name
-    ac['user'] = user
+    ac['user'] = user.lower()
     ac['pass'] = hashlib.sha256(password.encode()).hexdigest()
     ac_no = account_number()
     read()
@@ -101,7 +101,7 @@ def delete_account(n):
 
 def find(n):
     read()
-    if n in users.keys():
+    if n.lower() in users.keys():
         n = users[n]
     if n not in accounts:
         raise AccountNotFoundError(n)

@@ -17,7 +17,8 @@ def logo():
     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚══╝╚═╝  ╚═╝  ╚════╝  ╚═════╝  ╚═════╝  ╚═════╝ 
     """
     slogans = [' ' * 46 + 'a bank you can trust',
-               ' ' * 49 + 'the future, today']
+               ' ' * 49 + 'the future, today',
+               ' ' * 42 + "we don't cheat sometimes"]
     return typ + random.choice(slogans)
 
 
@@ -53,7 +54,7 @@ def make_list(heading, options, highlight=None):
     if len(options) > screen.height - 18:
         # TODO: trim options
         pass
-    options = [' ' + x + ' ' * (68 - len(x)) for x in options]
+    options = [' ' + x + ' ' * (71 - len(x)) for x in options]
     if highlight is not None:
         options[highlight] = cl.Fore.BLACK + cl.Back.LIGHTYELLOW_EX + options[highlight] + cl.Back.RESET + cl.Fore.LIGHTYELLOW_EX
     options = zip(options, range(h + g, h + g + len(options)))
@@ -61,7 +62,7 @@ def make_list(heading, options, highlight=None):
         tx.border(),
         logo(),
         tx.ln(tx.la(heading, 4), h),
-        tx.ln(tx.la('=' * 69), h + 1),
+        tx.ln(tx.la('═' * 72), h + 1),
         *[tx.ln(tx.la(x[0]), x[1]) for x in list(options)]
     )
     return s
@@ -178,15 +179,14 @@ def display_info(heading, *lines):
 def finish():
     screen.clear()
     random.seed(time.time())
-    backs = [cl.Back.MAGENTA,
-             cl.Back.GREEN,
-             cl.Back.RED,
-             cl.Back.YELLOW,
-             cl.Back.LIGHTRED_EX,
-             cl.Back.LIGHTBLACK_EX,
-             cl.Back.LIGHTGREEN_EX,
-             cl.Back.LIGHTMAGENTA_EX,
-             cl.Back.MAGENTA]
+    backs = random.sample([cl.Back.MAGENTA,
+                           cl.Back.GREEN,
+                           cl.Back.RED,
+                           cl.Back.YELLOW,
+                           cl.Back.LIGHTRED_EX,
+                           cl.Back.LIGHTBLACK_EX,
+                           cl.Back.LIGHTMAGENTA_EX,
+                           cl.Back.MAGENTA], 8)
     screen.print(cl.Fore.BLACK + random.choice(backs) + tx.overlay(
         tx.border(),
         logo(),
