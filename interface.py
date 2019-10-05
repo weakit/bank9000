@@ -53,7 +53,7 @@ def make_list(heading, options, highlight=None):
     if len(options) > screen.height - 18:
         # TODO: trim options
         pass
-    options = [' ' + x + ' ' * (67 - len(x)) for x in options]
+    options = [' ' + x + ' ' * (68 - len(x)) for x in options]
     if highlight is not None:
         options[highlight] = cl.Fore.BLACK + cl.Back.LIGHTYELLOW_EX + options[highlight] + cl.Back.RESET + cl.Fore.LIGHTYELLOW_EX
     options = zip(options, range(h + g, h + g + len(options)))
@@ -67,14 +67,17 @@ def make_list(heading, options, highlight=None):
     return s
 
 
-def list_handler(heading, options, go_back=False):
+def list_handler(heading, options, *lines, go_back=False):
+    lines = list(lines)
+    if lines:
+        lines.append('')
     choice = 0
     selected = False
     if go_back:
-        options.append("Return to previous menu")
+        options.append("Go Back")
     while not selected:
         screen.clear()
-        screen.print(make_list(heading, options, choice))
+        screen.print(make_list(heading, lines + options, len(lines) + choice))
         screen.move(0, -1)
         key = ord(screen.read())
         if key == 13:  # enter
@@ -125,6 +128,7 @@ def input_form(heading, types, prompts, *lines):
     for i, x in enumerate(inputs):
         done = False
         ask_int = False
+        ask_pass = False
         while not done:
             s = make_list(heading, lines + prompts)
             screen.clear()
@@ -132,8 +136,18 @@ def input_form(heading, types, prompts, *lines):
             if ask_int:
                 screen.move(0, -1)
                 screen.print(" Please enter a numeric value.")
+            if ask_pass:
+                screen.move(0, -1)
+                screen.print(" Please enter a valid password.")
             screen.move(len(prompts[i]) + 6, 14 + len(lines) + i)
-            inp = input().strip()
+            if x[0] == 'p':
+                import getpass
+                inp = getpass.getpass(prompt='').strip()
+                if ' ' in inp:
+                    ask_pass = True
+                    continue
+            else:
+                inp = input().strip()
             if x[0] == 'n':
                 try:
                     inputs[i] = (x[0], float(inp))
@@ -188,5 +202,4 @@ def process(thing_type, heading, thing):
 
 if __name__ == '__main__':
     init()
-    x = input_form('head', 'ns', ['h1', 'h2'])
-    print(x)
+    print(ch)

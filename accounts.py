@@ -100,6 +100,7 @@ def delete_account(n):
 
 
 def find(n):
+    read()
     if n in users.keys():
         n = users[n]
     if n not in accounts:
@@ -108,7 +109,6 @@ def find(n):
 
 
 def check_pass(n, password):
-    read()
     n = find(n)
     if accounts[n]['pass'] == hashlib.sha256(password.encode()).hexdigest():
         return True
@@ -116,34 +116,53 @@ def check_pass(n, password):
 
 
 def get_account(n):
-    read()
     n = find(n)
     return accounts[n]
 
 
+def get_name(n):
+    n = find(n)
+    return accounts[n]['name']
+
+
+def set_name(n, new_name):
+    global accounts
+    n = find(n)
+    accounts[n]['name'] = new_name
+    write()
+
+
+def get_user(n):
+    n = find(n)
+    return accounts[n]['user']
+
+
+def set_user(n, new_user):
+    global accounts
+    n = find(n)
+    accounts[n]['user'] = new_user
+    write()
+
+
 def get_balance(n):
-    read()
     n = find(n)
     return accounts[n]['balance']
 
 
 def set_balance(n, new_balance):
     global accounts
-    read()
     n = find(n)
     accounts[n]['balance'] = new_balance
     write()
 
 
 def get_age(n):
-    read()
     n = find(n)
     return accounts[n]['age']
 
 
 def set_age(n, new_age):
     global accounts
-    read()
     n = find(n)
     accounts[n]['age'] = new_age
     write()
