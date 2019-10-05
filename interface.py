@@ -67,7 +67,7 @@ def make_list(heading, options, highlight=None):
     return s
 
 
-def list_handler(heading, options, *lines, go_back=False):
+def list_handler(heading, options, *lines, go_back=False, end_line=None):
     lines = list(lines)
     if lines:
         lines.append('')
@@ -79,6 +79,8 @@ def list_handler(heading, options, *lines, go_back=False):
         screen.clear()
         screen.print(make_list(heading, lines + options, len(lines) + choice))
         screen.move(0, -1)
+        if end_line:
+            screen.print(' ' + end_line)
         key = ord(screen.read())
         if key == 13:  # enter
             selected = True
@@ -92,9 +94,13 @@ def list_handler(heading, options, *lines, go_back=False):
         elif key == 224:  # special keys
             key = ord(screen.read())  # get second char
             if key == 72:  # arrow up
-                choice = max(choice - 1, 0)
+                choice -= 1
+                if choice < 0:
+                    choice = len(options) - 1
             elif key == 80:  # arrow down
-                choice = min(choice + 1, len(options) - 1)
+                choice += 1
+                if choice > len(options) - 1:
+                    choice = 0
             elif key == 81:  # page down
                 choice = len(options) - 1
             elif key == 73:  # page up
@@ -152,8 +158,11 @@ def input_form(heading, types, prompts, *lines):
                 try:
                     inputs[i] = (x[0], float(inp))
                 except ValueError:
-                    ask_int = True
-                    continue
+                    if not inp:
+                        inputs[i] = (x[0], 0)
+                    else:
+                        ask_int = True
+                        continue
             else:
                 inputs[i] = (x[0], inp)
             prompts[i] += ' ' + inp
@@ -201,5 +210,4 @@ def process(thing_type, heading, thing):
 
 
 if __name__ == '__main__':
-    init()
-    print(ch)
+    pass

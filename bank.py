@@ -1,15 +1,21 @@
 import interface as ci
 import accounts as ac
+import money
 
 
 def handle_account(acc):
-    ch = ci.list_handler('Account ' + ac.pretty_no(acc),
-                         ["Withdrawals and Deposits", "Loans and Recurring Deposits",
-                          "Money Transfers", "Demand Drafts", "Logout"], "Account Holder's Name: " + ac.get_name(acc),
-                         "Username: " + ac.get_user(acc), 'Current Account Balance: Rs. ' + str(ac.get_balance(acc)))
-    x = lambda a, b, c: None
-    chop = {0: x, 1: x, 2: x, 3: x, 4: x, -1: x}
-    chop[ch](acc, ac, ci)
+    while True:
+        ch = ci.list_handler('Account ' + ac.pretty_no(acc),
+                             ["Withdrawals and Deposits", "Loans and Recurring Deposits",
+                              "Money Transfers", "Demand Drafts", "Logout"],
+                             "Account Holder's Name: " + ac.get_name(acc),
+                             "Username: " + ac.get_user(acc),
+                             'Current Account Balance: Rs. ' + str(ac.get_balance(acc)))
+        x = lambda a, b, c: None
+        chop = {0: money.uncredited, 1: x, 2: x, 3: x, 4: lambda *a: True, -1: lambda *a: True}
+        c = chop[ch](acc, ac, ci)
+        if c:
+            return None
 
 
 def new_account():

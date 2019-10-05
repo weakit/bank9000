@@ -146,7 +146,10 @@ def set_user(n, new_user):
 
 def get_balance(n):
     n = find(n)
-    return accounts[n]['balance']
+    b = accounts[n]['balance']
+    if float(b).is_integer():
+        return int(b)
+    return round(b, 2)
 
 
 def set_balance(n, new_balance):
