@@ -7,7 +7,7 @@
 ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚══╝╚═╝  ╚═╝  ╚════╝  ╚═════╝  ╚═════╝  ╚═════╝ 
                                               a bank you can trust
 ```
-[![Build Status](https://travis-ci.com/weakit/comp-project.svg?token=AzkJzGBuqpKzByqVwxUe&branch=master)](https://travis-ci.com/weakit/comp-project)
+<img align="right" width="81" height="20" src="https://api.travis-ci.com/weakit/comp-project.svg?token=AzkJzGBuqpKzByqVwxUe&branch=master">
 
 A simple bank management system that our team put out for school.
 
