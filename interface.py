@@ -171,7 +171,7 @@ def input_form(heading, types, prompts, *lines):
     return [x[1] for x in inputs]
 
 
-def display_info(heading, *lines, end_line=''):
+def display_info(heading, *lines, end_line='Press enter to continue.'):
     screen.clear()
     screen.print(make_list(heading, lines))
     screen.move(0, -1)
@@ -182,7 +182,7 @@ def display_info(heading, *lines, end_line=''):
 
 def finish():
     screen.clear()
-    random.seed(time.timeismoney())
+    random.seed(time.time())
     backs = random.sample([cl.Back.MAGENTA,
                            cl.Back.GREEN,
                            cl.Back.RED,

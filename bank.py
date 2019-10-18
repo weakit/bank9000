@@ -20,9 +20,45 @@ def handle_account(acc):
             return None
 
 
-def handle_currencies(acc, ac, ci):
+def handle_currencies(*args):
     supported = currencies.currencies()
-    pass
+    s = ["Supported Currencies:", '\n']
+    st = ''
+    for i, x in enumerate(supported):
+        st += x + ' '
+        if not (i + 1) % 10:
+            s.append(st)
+            st = ''
+    s.append('\n')
+    unsupported = False
+    weird_value = False
+    nothing = False
+    while True:
+        if nothing:
+            if ci.list_handler('Account Login', ['Try Again', 'Go Back'], 'Please enter valid input.'):
+                return None
+        if weird_value:
+            s[-1] = "Invalid value"
+        if unsupported:
+            s[-1] = "Unsupported Currency."
+        inp, to = ci.input_form('Currency Conversions', 'ss', ["Convert:", "To:"], *s)
+        if not inp or not to:
+            nothing = True
+            continue
+        inp = inp.replace(' ', '').upper()
+        to = to.replace(' ', '').upper()
+        frm = inp[-3:]
+        if frm not in supported or to not in supported:
+            unsupported = True
+            continue
+        try:
+            value = float(inp[:-3])
+        except ValueError:
+            weird_value = True
+            continue
+        break
+    converted_value = round(currencies.convert(frm, to, value), 4)
+    ci.display_info("Currency Conversions", str(value) + ' ' + frm + ' = ' + str(converted_value) + ' ' + to)
 
 
 def new_account():
@@ -118,9 +154,13 @@ if __name__ == '__main__':
         0: new_account,
         1: login,
         2: simulate_time,
-        3: finish
+        3: handle_currencies,
+        4: finish
     }
     while True:
         op = ci.list_handler('', ['Open a new bank9000™ Account',
-                                  'Login with your existing bank9000™ Account', 'Simulate Time', 'Exit'])
+                                  'Login with your existing bank9000™ Account',
+                                  'Simulate Passage of Time',
+                                  'Currency Conversions',
+                                  'Exit'])
         opdc[op]()
