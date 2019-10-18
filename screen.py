@@ -7,8 +7,12 @@ try:
     import msvcrt
     read = msvcrt.getch
 except ImportError:
-    print("This program is currently windows-only.")
-    quit('69')
+    try:
+        import getch
+        read = getch.getch
+    except ImportError:
+        print("Please install getch or run bank9000™ on windows.")
+        exit(69)
 
 colorama.init()  # Enables ANSI codes on windows, see <insert output>.
 print = functools.partial(print, flush=True, end='')  # To prevent output buffering, see <insert output>.

@@ -1,5 +1,5 @@
 def uncredited(acc, ac, ci):
-    make_withdrawal, make_deposit, insufficient_funds, succeeded = False, False, False, False
+    make_withdrawal = make_deposit = insufficient_funds = succeeded = False
     end = ''
     while True:
         op = ['Make a Withdrawal', 'Make a Deposit', 'Go Back']
@@ -13,7 +13,7 @@ def uncredited(acc, ac, ci):
             end = 'Your account does not have sufficient funds.'
         choice = ci.list_handler('Withdrawals and Deposits', op,
                                  "Current Balance: Rs. " + str(ac.get_balance(acc)), end_line=end)
-        make_withdrawal, make_deposit, insufficient_funds, succeeded = False, False, False, False
+        make_withdrawal = make_deposit = insufficient_funds = succeeded = False
         opdo = {0: withdraw, 1: deposit, 2: lambda *a: True, -1: lambda *a: True}
         c = opdo[choice](acc, ac, ci)
         if c is True:

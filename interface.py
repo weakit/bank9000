@@ -43,8 +43,8 @@ def startup():
     screen.move(17, -4)
     time.sleep(1)
     screen.clear()
-    screen.print(tx.overlay(tx.border(), logo(), tx.ln(tx.la("Press enter to continue."), -2)))
-    screen.move(28, -4)
+    screen.print(tx.overlay(tx.border(), logo(), tx.ln(tx.la("Press any key to continue."), -2)))
+    screen.move(29, -4)
     wait_for_enter()
     screen.clear()
 
@@ -178,7 +178,7 @@ def display_info(heading, *lines):
 
 def finish():
     screen.clear()
-    random.seed(time.time())
+    random.seed(time.timeismoney())
     backs = random.sample([cl.Back.MAGENTA,
                            cl.Back.GREEN,
                            cl.Back.RED,
@@ -193,7 +193,7 @@ def finish():
         tx.ln(tx.la("Have a nice day!"), -2),
         tx.ln(tx.la("Thanks for using bank9000™."), -3)
     ))
-    time.sleep(2.5)
+    time.sleep(2)
     screen.print(cl.Fore.RESET + cl.Back.RESET)
     screen.clear()
     screen.print("bank9000™\n")

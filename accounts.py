@@ -120,6 +120,10 @@ def get_account(n):
     return accounts[n]
 
 
+def get_accounts():
+    return list(accounts.keys())
+
+
 def get_name(n):
     n = find(n)
     return accounts[n]['name']
@@ -174,5 +178,6 @@ def set_age(n, new_age):
 if __name__ == '__main__':
     read()
     print(users)
-    print(accounts)
+    print(accounts['XYVN5553961'])
+    print(get_accounts())
     write()

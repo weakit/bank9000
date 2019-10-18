@@ -16,6 +16,10 @@ ord:
 Nonlocal:
     https://www.codesdope.com/blog/article/nested-function-scope-of-variable-closures-in-pyth/
 
+Threading:
+    https://realpython.com/intro-to-python-threading/
+
+
 Python Docs:
     https://docs.python.org/3.7/library/functools.html
     http://docs.python.org/3.7/library/base64.html
