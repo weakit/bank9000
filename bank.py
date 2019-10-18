@@ -2,6 +2,7 @@ import interface as ci
 import accounts as ac
 import money
 import currencies
+import timesim
 
 
 def handle_account(acc):
@@ -106,14 +107,20 @@ def finish():
     exit()
 
 
+def simulate_time():
+    timesim.handle(ac, ci, 9)
+
+
 if __name__ == '__main__':
     ci.init()
     ci.startup()
     opdc = {
         0: new_account,
         1: login,
-        2: finish
+        2: simulate_time,
+        3: finish
     }
     while True:
-        op = ci.list_handler('', ['Open a new bank9000™ Account', 'Login with your existing bank9000™ Account', 'Exit'])
+        op = ci.list_handler('', ['Open a new bank9000™ Account',
+                                  'Login with your existing bank9000™ Account', 'Simulate Time', 'Exit'])
         opdc[op]()

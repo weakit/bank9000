@@ -156,10 +156,22 @@ def get_balance(n):
     return round(b, 2)
 
 
+def get_balance_raw(n):
+    n = find(n)
+    return accounts[n]['balance']
+
+
 def set_balance(n, new_balance):
     global accounts
     n = find(n)
     accounts[n]['balance'] = new_balance
+    write()
+
+
+def mod_balance(n, mod_balance):
+    global accounts
+    n = find(n)
+    accounts[n]['balance'] += mod_balance
     write()
 
 
