@@ -18,7 +18,7 @@ def simulate(ac, days, rate):
         ac.set_age(account, days+age)
 
 
-def db_reset():
+def db_reset(ac):
     """to reset values in case of error"""
     ac.read()
     for x in ac.get_accounts():
@@ -27,8 +27,9 @@ def db_reset():
 
 
 if __name__ == '__main__':
-    simulate(ac, 30, 9)
-    db_reset()
-    print(ac.accounts)
+    import accounts as AC
+    simulate(AC, 30, 9)
+    db_reset(AC)
+    print(AC.accounts)
 
 
