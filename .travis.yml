@@ -1,0 +1,8 @@
+os: windows
+language: shell
+before_install:
+  - choco install python
+  - python -m pip install --upgrade pip
+  - python -m pip install colorama
+env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+script: python bank.py
