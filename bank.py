@@ -1,21 +1,27 @@
 import interface as ci
 import accounts as ac
 import money
+import currencies
 
 
 def handle_account(acc):
     while True:
         ch = ci.list_handler('Account ' + ac.pretty_no(acc),
-                             ["Withdrawals and Deposits", "Loans and Recurring Deposits",
-                              "Money Transfers", "Demand Drafts", "Logout"],
+                             ["Withdrawals and Deposits", "Money Transfers",
+                              "Demand Drafts", "Currency Conversions", "Logout"],
                              "Account Holder's Name: " + ac.get_name(acc),
                              "Username: " + ac.get_user(acc),
                              'Current Account Balance: Rs. ' + str(ac.get_balance(acc)))
-        x = lambda a, b, c: None
-        chop = {0: money.uncredited, 1: x, 2: x, 3: x, 4: lambda *a: True, -1: lambda *a: True}
+        chop = {0: money.uncredited, 1: lambda *a: None, 2: lambda *a: None,
+                3: handle_currencies, 4: lambda *a: True, -1: lambda *a: True}
         c = chop[ch](acc, ac, ci)
         if c:
             return None
+
+
+def handle_currencies(acc, ac, ci):
+    supported = currencies.currencies()
+    pass
 
 
 def new_account():

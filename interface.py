@@ -171,9 +171,13 @@ def input_form(heading, types, prompts, *lines):
     return [x[1] for x in inputs]
 
 
-def display_info(heading, *lines):
+def display_info(heading, *lines, end_line=''):
     screen.clear()
     screen.print(make_list(heading, lines))
+    screen.move(0, -1)
+    if end_line:
+        screen.print(' ' + end_line)
+    wait_for_enter()
 
 
 def finish():

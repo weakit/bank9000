@@ -1,7 +1,5 @@
 import requests
 
-
-
 rates = {
   "CAD": 0.0185041171,
   "HKD": 0.1097273051,
@@ -39,27 +37,26 @@ rates = {
 }
 
 
-data = requests.get ("https://api.exchangeratesapi.io/latest?base=INR")
+data = requests.get("https://api.exchangeratesapi.io/latest?base=INR")
 if data.status_code == 200:
     rates = data.json()['rates']
 
 
-def convert(frm,to,value):
-    amount=value*rates[to]/rates[frm]
+def convert(frm, to, value):
+    amount = value * rates[to] / rates[frm]
     return amount
 
 
-def list_rates():
-  return rates.keys()
-
+def currencies():
+    return rates.keys()
 
 
 if __name__ == '__main__':
-  value = input("Please enter amount :")
-  value = int(value)
-  frm = input("Please enter the currency you have : ")
-  to = input("please enter the foreign currency you want : ")
-  convert(frm, to, value)
+    value = input("Please enter amount :")
+    value = int(value)
+    frm = input("Please enter the currency you have : ")
+    to = input("please enter the foreign currency you want : ")
+    convert(frm, to, value)
 
 
 
