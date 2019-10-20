@@ -75,7 +75,7 @@ def available(n):
 def make_account_low(name, user, password):
     ac = default
     ac['name'] = name
-    ac['user'] = user.lower()
+    ac['user'] = user
     ac['pass'] = hashlib.sha256(password.encode()).hexdigest()
     ac_no = account_number()
     read()

@@ -3,6 +3,7 @@ import accounts as ac
 import money
 import currencies
 import timesim
+import transfers
 
 
 def handle_account(acc):
@@ -13,7 +14,7 @@ def handle_account(acc):
                              "Account Holder's Name: " + ac.get_name(acc),
                              "Username: " + ac.get_user(acc),
                              'Current Account Balance: Rs. ' + str(ac.get_balance(acc)))
-        chop = {0: money.uncredited, 1: lambda *a: None, 2: lambda *a: None,
+        chop = {0: money.uncredited, 1: transfers.handle, 2: lambda *a: None,
                 3: handle_currencies, 4: lambda *a: True, -1: lambda *a: True}
         c = chop[ch](acc, ac, ci)
         if c:
