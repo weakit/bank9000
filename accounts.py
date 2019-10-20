@@ -60,7 +60,7 @@ def read():
 
 
 def write():
-    f = open("accounts.dat", "wb+")
+    f = open("accounts.dat", "wb")
     f.write(("bank9000™ accounts data\nwritten UTC " + str(datetime.utcnow()) + '\n').encode('utf-8'))
     s = base64.b64encode(json.dumps((users, accounts)).encode())
     f.write(zlib.compress(s) + b'\n')
