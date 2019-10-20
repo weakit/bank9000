@@ -31,9 +31,7 @@ def handle_currencies(*args):
             s.append(st)
             st = ''
     s.append('\n')
-    unsupported = False
-    weird_value = False
-    nothing = False
+    unsupported = weird_value = nothing = False
     while True:
         if nothing:
             if ci.list_handler('Account Login', ['Try Again', 'Go Back'], 'Please enter valid input.'):
@@ -42,6 +40,7 @@ def handle_currencies(*args):
             s[-1] = "Invalid value"
         if unsupported:
             s[-1] = "Unsupported Currency."
+        unsupported = weird_value = nothing = False
         inp, to = ci.input_form('Currency Conversions', 'ss', ["Convert:", "To:"], *s)
         if not inp or not to:
             nothing = True
@@ -63,10 +62,7 @@ def handle_currencies(*args):
 
 
 def new_account():
-    done = False
-    ask = False
-    no_pass = False
-    no_user = False
+    done = ask = no_pass = no_user = False
     ch = 0
     while not done:
         if ask:
@@ -80,18 +76,15 @@ def new_account():
                                  'You have not entered a username.')
         if ch:
             return None
+        done = ask = no_pass = no_user = False
         info = ci.input_form('Account Details', 'ssp', ['Name:', 'Username:', 'Password:'])
         if not info[0]:
             info[0] = "Anonymous"
         if not info[2]:
             no_pass = True
-            no_user = False
-            ask = False
             continue
         if not info[1]:
             no_user = True
-            no_pass = False
-            ask = False
             continue
         if ac.available(info[1]):
             done = True
@@ -110,9 +103,7 @@ def new_account():
 
 
 def login():
-    done = False
-    non_existent = False
-    wrong_pass = False
+    done = non_existent = wrong_pass = False
     ch = 0
     while not done:
         if non_existent:
@@ -121,18 +112,16 @@ def login():
         elif wrong_pass:
             ch = ci.list_handler('Account Login', ['Try Again', 'Go Back'],
                                  "The password you have entered is incorrect.")
-        if non_existent or wrong_pass:
-            if ch:
-                return None
+        if ch:
+            return None
+        done = non_existent = wrong_pass = False
         cred = ci.input_form("Account Login", 'sp', ['Account Number/Username:', 'Password:'])
         try:
             acc = ac.find(cred[0])
         except ac.AccountNotFoundError:
             non_existent = True
-            wrong_pass = False
             continue
         if not ac.check_pass(acc, cred[1]):
-            non_existent = False
             wrong_pass = True
             continue
         handle_account(acc)

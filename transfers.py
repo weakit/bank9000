@@ -10,16 +10,18 @@ def handle(acc, ac, ci):
     ch = 0
     while True:
         if account_not_found:
-            ch = ci.list_handler('Account Login', ['Try Again', 'Go Back'],
+            ch = ci.list_handler('Transfer Funds', ['Try Again', 'Go Back'],
                                  "Account number " + inp[0] + " not found.")
         elif insufficient_funds:
-            ch = ci.list_handler('Account Login', ['Try Again', 'Go Back'],
+            ch = ci.list_handler('Transfer Funds', ['Try Again', 'Go Back'],
                                  "You do not have sufficient funds to complete this transaction.")
         elif thief:
-            ch = ci.list_handler('Account Login', ['Try Again', 'Go Back'],
+            ch = ci.list_handler('Transfer Funds', ['Try Again', 'Go Back'],
                                  "Please input a valid amount to transfer")
         if ch:
             return None
+        account_not_found = False
+        insufficient_funds = False
         inp = ci.input_form("Transfer Funds", 'sn', ['Account Number/Username:', 'Amount to Transfer:'])
         if inp[1] < 0:
             thief = False
