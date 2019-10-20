@@ -18,7 +18,8 @@ def logo():
     """
     slogans = [' ' * 46 + 'a bank you can trust',
                ' ' * 49 + 'the future, today',
-               ' ' * 42 + "we don't cheat sometimes"]
+               ' ' * 42 + "we don't cheat sometimes",
+               ' ' * 57 + 'open 24/7']
     return typ + random.choice(slogans)
 
 
