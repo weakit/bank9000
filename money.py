@@ -14,7 +14,8 @@ def uncredited(acc, ac, ci):
         choice = ci.list_handler('Withdrawals and Deposits', op,
                                  "Current Balance: Rs. " + str(ac.get_balance(acc)), end_line=end)
         make_withdrawal = make_deposit = insufficient_funds = succeeded = False
-        opdo = {0: withdraw, 1: deposit, 2: lambda *a: True, -1: lambda *a: True}
+        opdo = {0: withdraw, 1: deposit,
+                2: lambda *a: True, -1: lambda *a: True}
         c = opdo[choice](acc, ac, ci)
         if c is True:
             return None
@@ -32,7 +33,8 @@ def uncredited(acc, ac, ci):
 
 def withdraw(acc, ac, ci):
     cur_bal = ac.get_balance(acc)
-    amt = ci.input_form("Withdraw Funds", 'n', ["Amount to Withdraw:"], "Current Balance: Rs. " + str(cur_bal))[0]
+    amt = ci.input_form("Withdraw Funds", 'n', [
+                        "Amount to Withdraw:"], "Current Balance: Rs. " + str(cur_bal))[0]
     if not amt:
         return None
     if amt < 0:
@@ -46,7 +48,8 @@ def withdraw(acc, ac, ci):
 
 def deposit(acc, ac, ci):
     cur_bal = ac.get_balance(acc)
-    amt = ci.input_form("Deposit Funds", 'n', ["Amount to Deposit:"], "Current Balance: Rs. " + str(cur_bal))[0]
+    amt = ci.input_form("Deposit Funds", 'n', [
+                        "Amount to Deposit:"], "Current Balance: Rs. " + str(cur_bal))[0]
     if not amt:
         return None
     if amt < 0:

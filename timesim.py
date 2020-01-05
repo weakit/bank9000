@@ -31,5 +31,3 @@ if __name__ == '__main__':
     simulate(AC, 30, 9)
     db_reset(AC)
     print(AC.accounts)
-
-

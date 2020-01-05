@@ -1,8 +1,9 @@
-os: windows
-language: shell
-before_install:
-  - choco install python
-  - python -m pip install --upgrade pip
-  - python -m pip install colorama
-env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-script: python bank.py
+language: python
+python:
+  # was originally written on 3.7.4 (windows) and 3.6.9 (linux)
+  - "3.6"
+  - "3.7"
+  - "pypy3"
+install:
+  - pip install -r requirments.txt
+script: python test.py

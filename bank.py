@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import interface as ci
 import accounts as ac
 import money
@@ -42,7 +43,8 @@ def handle_currencies(*args):
         if unsupported:
             s[-1] = "Unsupported Currency."
         unsupported = weird_value = nothing = False
-        inp, to = ci.input_form('Currency Conversions', 'ss', ["Convert:", "To:"], *s)
+        inp, to = ci.input_form('Currency Conversions',
+                                'ss', ["Convert:", "To:"], *s)
         if not inp or not to:
             nothing = True
             continue
@@ -59,7 +61,8 @@ def handle_currencies(*args):
             continue
         break
     converted_value = round(currencies.convert(frm, to, value), 4)
-    ci.display_info("Currency Conversions", str(value) + ' ' + frm + ' = ' + str(converted_value) + ' ' + to)
+    ci.display_info("Currency Conversions", str(value) + ' ' +
+                    frm + ' = ' + str(converted_value) + ' ' + to)
 
 
 def new_account():
@@ -78,7 +81,8 @@ def new_account():
         if ch:
             return None
         done = ask = no_pass = no_user = False
-        info = ci.input_form('Account Details', 'ssp', ['Name:', 'Username:', 'Password:'])
+        info = ci.input_form('Account Details', 'ssp', [
+                             'Name:', 'Username:', 'Password:'])
         if not info[0]:
             info[0] = "Anonymous"
         if not info[2]:
@@ -100,7 +104,7 @@ def new_account():
                     "Account Name: " + acc['name'],
                     "Username: " + acc['user'], '',
                     "Press any key to continue.")
-    ci.wait_for_enter()
+    ci.wait_for_key()
 
 
 def login():
@@ -116,7 +120,8 @@ def login():
         if ch:
             return None
         done = non_existent = wrong_pass = False
-        cred = ci.input_form("Account Login", 'sp', ['Account Number/Username:', 'Password:'])
+        cred = ci.input_form("Account Login", 'sp', [
+                             'Account Number/Username:', 'Password:'])
         try:
             acc = ac.find(cred[0])
         except ac.AccountNotFoundError:

@@ -23,7 +23,7 @@ def logo():
     return typ + random.choice(slogans)
 
 
-def wait_for_enter():
+def wait_for_key():
     screen.read()
 
 
@@ -44,9 +44,10 @@ def startup():
     screen.move(17, -4)
     time.sleep(1)
     screen.clear()
-    screen.print(tx.overlay(tx.border(), logo(), tx.ln(tx.la("Press any key to continue."), -2)))
+    screen.print(tx.overlay(tx.border(), logo(), tx.ln(
+        tx.la("Press any key to continue."), -2)))
     screen.move(29, -4)
-    wait_for_enter()
+    wait_for_key()
     screen.clear()
 
 
@@ -57,7 +58,8 @@ def make_list(heading, options, highlight=None):
         pass
     options = [' ' + x + ' ' * (71 - len(x)) for x in options]
     if highlight is not None:
-        options[highlight] = cl.Fore.BLACK + cl.Back.LIGHTYELLOW_EX + options[highlight] + cl.Back.RESET + cl.Fore.LIGHTYELLOW_EX
+        options[highlight] = cl.Fore.BLACK + cl.Back.LIGHTYELLOW_EX + \
+            options[highlight] + cl.Back.RESET + cl.Fore.LIGHTYELLOW_EX
     options = zip(options, range(h + g, h + g + len(options)))
     s = tx.overlay(
         tx.border(),
@@ -67,6 +69,44 @@ def make_list(heading, options, highlight=None):
         *[tx.ln(tx.la(x[0]), x[1]) for x in list(options)]
     )
     return s
+
+
+def find_key(key):
+    if sc.using_getch:
+        if key == 10:  # enter
+            return 'enter'
+        elif key == 27:  # special keys
+            if ord(screen.read()) == 27:  # esc twice, otherwise discard '['
+                return 'esc'
+            key = ord(screen.read())  # get third char
+            if key == 65:  # up
+                return 'up'
+            elif key == 66:  # down
+                return 'down'
+            elif key == 67:  # right
+                return 'right'
+            elif key == 68:  # left
+                return 'left'
+            elif key == 53:  # page up
+                return 'pup'
+            elif key == 54:  # page down
+                return 'pdown'
+    else:
+        if key == 13:  # enter
+            return 'enter'
+        elif key == 27:  # esc
+            return 'esc'
+        elif key == 224:  # special keys
+            key = ord(screen.read())  # get second char
+            if key == 72:  # arrow up
+                return 'up'
+            elif key == 80:  # arrow down
+                return 'down'
+            elif key == 81:  # page down
+                return 'pdown'
+            elif key == 73:  # page up
+                return 'pup'
+    return 'dunno'
 
 
 def list_handler(heading, options, *lines, go_back=False, end_line=None):
@@ -84,29 +124,28 @@ def list_handler(heading, options, *lines, go_back=False, end_line=None):
         if end_line:
             screen.print(' ' + end_line)
         key = ord(screen.read())
-        if key == 13:  # enter
+        key = find_key(key)
+        if key == 'enter':
             selected = True
             if go_back and choice + 1 == len(options):
                 return -1
             return choice
-        elif key == 27:  # esc
+        elif key == 'esc':
             choice = -1
             selected = True
             return -1
-        elif key == 224:  # special keys
-            key = ord(screen.read())  # get second char
-            if key == 72:  # arrow up
-                choice -= 1
-                if choice < 0:
-                    choice = len(options) - 1
-            elif key == 80:  # arrow down
-                choice += 1
-                if choice > len(options) - 1:
-                    choice = 0
-            elif key == 81:  # page down
+        if key == 'up':
+            choice -= 1
+            if choice < 0:
                 choice = len(options) - 1
-            elif key == 73:  # page up
+        elif key == 'down':
+            choice += 1
+            if choice > len(options) - 1:
                 choice = 0
+        elif key == 'pdown':
+            choice = len(options) - 1
+        elif key == 'pup':
+            choice = 0
     return -1
 
 
@@ -172,13 +211,13 @@ def input_form(heading, types, prompts, *lines):
     return [x[1] for x in inputs]
 
 
-def display_info(heading, *lines, end_line='Press enter to continue.'):
+def display_info(heading, *lines, end_line='Press any key to continue.'):
     screen.clear()
     screen.print(make_list(heading, lines))
     screen.move(0, -1)
     if end_line:
         screen.print(' ' + end_line)
-    wait_for_enter()
+    wait_for_key()
 
 
 def finish():

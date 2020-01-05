@@ -38,7 +38,8 @@ def read():
 
 def write():
     f = open('demands.dat', 'wb')
-    f.write(("bank9000™ demands data\nwritten UTC " + str(datetime.utcnow()) + '\n').encode('utf-8'))
+    f.write(("bank9000™ demands data\nwritten UTC " +
+             str(datetime.utcnow()) + '\n').encode('utf-8'))
     p = zlib.compress(base64.b64encode(json.dumps(dds).encode()))
     f.write(p + b'\n')
     f.close()
@@ -122,7 +123,8 @@ def handle_creation(acc):
         if a == -69:
             invalid = True
             continue
-        ci.display_info('Demand Drafts', 'Demand Draft Created Successfully', 'Demand Draft No. ' + a)
+        ci.display_info(
+            'Demand Drafts', 'Demand Draft Created Successfully', 'Demand Draft No. ' + a)
         return None
 
 
@@ -132,7 +134,8 @@ def handle_claim(acc):
         if invalid:
             if ci.list_handler('Demand Drafts', ['Try Again', 'Go Back'], 'Demand Draft Number does not exist.'):
                 return None
-        s = ci.input_form("Claim Demand Draft", 's', ['Enter Demand Draft No:'])[0]
+        s = ci.input_form("Claim Demand Draft", 's', [
+                          'Enter Demand Draft No:'])[0]
         d = deposit(acc, s.replace(' ', '').upper())
         if d == -69:
             invalid = True

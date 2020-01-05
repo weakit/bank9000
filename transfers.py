@@ -22,7 +22,8 @@ def handle(acc, ac, ci):
             return None
         account_not_found = False
         insufficient_funds = False
-        inp = ci.input_form("Transfer Funds", 'sn', ['Account Number/Username:', 'Amount to Transfer:'])
+        inp = ci.input_form("Transfer Funds", 'sn', [
+                            'Account Number/Username:', 'Amount to Transfer:'])
         if inp[1] < 0:
             thief = False
             continue
