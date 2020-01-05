@@ -8,6 +8,7 @@ sc = screen  # for ease in external usage
 
 
 def logo():
+    """Returns logo with a random slogan"""
     typ = """\n
     ██████╗  █████╗ ███╗  ██╗██╗  ██╗  █████╗  ██████╗  ██████╗  ██████╗ TM
     ██╔══██╗██╔══██╗████╗ ██║██║ ██╔╝ ██╔══██╗██╔═████╗██╔═████╗██╔═████╗
@@ -24,16 +25,19 @@ def logo():
 
 
 def wait_for_key():
+    """Waits for user keypress"""
     screen.read()
 
 
 def init():
+    """Initialize screen"""
     screen.print(screen.colorama.Fore.LIGHTYELLOW_EX)
     screen.clear()
     tx.size(screen.width, screen.height)
 
 
 def startup():
+    """Display startup screen"""
     screen.clear()
     startup_screen = tx.overlay(
         tx.border(),
@@ -52,6 +56,7 @@ def startup():
 
 
 def make_list(heading, options, highlight=None):
+    """Display a list of items on screen"""
     h, g = 11, 3
     if len(options) > screen.height - 18:
         # TODO: trim options
@@ -72,6 +77,7 @@ def make_list(heading, options, highlight=None):
 
 
 def find_key(key):
+    """Parse user input"""
     if sc.using_getch:
         if key == 10:  # enter
             return 'enter'
@@ -110,6 +116,7 @@ def find_key(key):
 
 
 def list_handler(heading, options, *lines, go_back=False, end_line=None):
+    """Asks user for a choice in a list of options"""
     lines = list(lines)
     if lines:
         lines.append('')
@@ -150,6 +157,7 @@ def list_handler(heading, options, *lines, go_back=False, end_line=None):
 
 
 def simple_input(heading, prompt):
+    """Simple single field string input"""
     h, g = 11, 3
     screen.clear()
     s = tx.overlay(
@@ -166,6 +174,16 @@ def simple_input(heading, prompt):
 
 
 def input_form(heading, types, prompts, *lines):
+    """Ask the user to fill in an input form.
+
+    Types is a string consisting of the inputs to take.
+    Three types are currently supported: string, number and password.
+    
+    For example, 'ssnpn' passed to types will ask for two strings, 
+    one numeric value, one password and one more string in that order.
+
+    Prompts is an array consisting of prompts for each corresponding input.
+    """
     inputs = []
     lines = list(lines)
     if lines:
@@ -212,6 +230,7 @@ def input_form(heading, types, prompts, *lines):
 
 
 def display_info(heading, *lines, end_line='Press any key to continue.'):
+    """Display a set of lines on screen"""
     screen.clear()
     screen.print(make_list(heading, lines))
     screen.move(0, -1)
@@ -221,6 +240,7 @@ def display_info(heading, *lines, end_line='Press any key to continue.'):
 
 
 def finish():
+    """Display the exit screen"""
     screen.clear()
     random.seed(time.time())
     backs = random.sample([cl.Back.MAGENTA,
@@ -241,17 +261,3 @@ def finish():
     screen.print(cl.Fore.RESET + cl.Back.RESET)
     screen.clear()
     screen.print("bank9000™\n")
-
-
-def process_list(heading, thing):
-    list_handler(heading, 'list')
-
-
-def process(thing_type, heading, thing):
-    if thing_type == 'list':
-        process_list(heading, thing)
-    return None
-
-
-if __name__ == '__main__':
-    pass

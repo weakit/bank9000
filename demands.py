@@ -18,6 +18,7 @@ dds = {"ABC123456": default}
 
 
 def dd_no():
+    """Generates a random DD number"""
     s = ""
     for x in range(3):
         s += random.choice(string.ascii_uppercase)
@@ -27,6 +28,7 @@ def dd_no():
 
 
 def read():
+    """Read DDs from disk"""
     global dds
     try:
         f = open('demands.dat', 'rb')
@@ -37,6 +39,7 @@ def read():
 
 
 def write():
+    """Write DDs to disk"""
     f = open('demands.dat', 'wb')
     f.write(("bank9000™ demands data\nwritten UTC " +
              str(datetime.utcnow()) + '\n').encode('utf-8'))
@@ -46,6 +49,7 @@ def write():
 
 
 def del_dd(dd_num):
+    """Delete a DD"""
     read()
     if dd_num in dds.keys():
         del(dds[dd_num])
@@ -53,6 +57,7 @@ def del_dd(dd_num):
 
 
 def write_dd(dd_num, dd):
+    """Save a DD"""
     global dds
     read()
     dds[dd_num] = dd
@@ -60,6 +65,7 @@ def write_dd(dd_num, dd):
 
 
 def gen_dd(acc, amt):
+    """Generate a DD (low-level)"""
     read()
     dd_num = dd_no()
     while dd_num in dds.keys():
@@ -72,6 +78,7 @@ def gen_dd(acc, amt):
 
 
 def issue(acc, amt):
+    """Issue a DD"""
     if amt <= 0:
         return -69
     if ac.get_balance_raw(acc) < amt:
@@ -83,6 +90,7 @@ def issue(acc, amt):
 
 
 def deposit(acc, dd_num):
+    """Deposit a DD"""
     if dd_num not in dds.keys():
         return -69
     original_acc, amt = dds[dd_num]['ac_no'], dds[dd_num]['amount']
@@ -92,6 +100,7 @@ def deposit(acc, dd_num):
 
 
 def handle(acc, acx, cix):
+    """Handle DD Creation/Claims"""
     global ac, ci
     ac, ci = acx, cix
     op = ['Create a Demand Draft', 'Claim a Demand Draft', 'Go Back']
@@ -103,6 +112,7 @@ def handle(acc, acx, cix):
 
 
 def handle_creation(acc):
+    """Handle DD creation"""
     insufficient_funds = invalid = False
     ch = 0
     while True:
@@ -129,6 +139,7 @@ def handle_creation(acc):
 
 
 def handle_claim(acc):
+    """Handle DD claim"""
     invalid = False
     while True:
         if invalid:
@@ -142,9 +153,3 @@ def handle_claim(acc):
             continue
         ci.display_info('Demand Drafts', 'Demand Draft Claimed Successfully')
         return None
-
-
-if __name__ == '__main__':
-    read()
-    write()
-    print(dds)

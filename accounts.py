@@ -29,6 +29,7 @@ class AccountNotFoundError(Exception):
 
 
 def account_number():
+    """Generates a random account number"""
     s = ""
     for x in range(4):
         s += random.choice(string.ascii_uppercase)
@@ -38,6 +39,7 @@ def account_number():
 
 
 def pretty_no(n, reverse=False):
+    """Formats an account number"""
     if reverse:
         return ''.join(n.split(' '))
     s = ''
@@ -49,6 +51,7 @@ def pretty_no(n, reverse=False):
 
 
 def read():
+    """Read accounts from disk"""
     global accounts, users
     try:
         f = open("accounts.dat", "rb")
@@ -60,6 +63,7 @@ def read():
 
 
 def write():
+    """Write accounts to disk"""
     f = open("accounts.dat", "wb")
     f.write(("bank9000™ accounts data\nwritten UTC " + str(datetime.utcnow()) + '\n').encode('utf-8'))
     s = base64.b64encode(json.dumps((users, accounts)).encode())
@@ -68,11 +72,13 @@ def write():
 
 
 def available(n):
+    """Check if username is available"""
     read()
     return n not in users.keys()
 
 
 def make_account_low(name, user, password):
+    """Make an account"""
     ac = default
     ac['name'] = name
     ac['user'] = user
@@ -88,6 +94,7 @@ def make_account_low(name, user, password):
 
 
 def delete_account(n):
+    """Delete account"""
     read()
     if n in users.keys():
         ac_no = users.pop(n)
@@ -100,6 +107,7 @@ def delete_account(n):
 
 
 def find(n):
+    """Search for account number/username"""
     read()
     if n.lower() in users.keys():
         n = users[n]
@@ -109,6 +117,7 @@ def find(n):
 
 
 def check_pass(n, password):
+    """Check if password matches"""
     n = find(n)
     if accounts[n]['pass'] == hashlib.sha256(password.encode()).hexdigest():
         return True
@@ -116,20 +125,24 @@ def check_pass(n, password):
 
 
 def get_account(n):
+    """Get an account"""
     n = find(n)
     return accounts[n]
 
 
 def get_accounts():
+    """Returns all accounts"""
     return list(accounts.keys())
 
 
 def get_name(n):
+    """Get name of account"""
     n = find(n)
     return accounts[n]['name']
 
 
 def set_name(n, new_name):
+    """Set name of account"""
     global accounts
     n = find(n)
     accounts[n]['name'] = new_name
@@ -137,11 +150,13 @@ def set_name(n, new_name):
 
 
 def get_user(n):
+    """Get username of account"""
     n = find(n)
     return accounts[n]['user']
 
 
 def set_user(n, new_user):
+    """Set username of account"""
     global accounts
     n = find(n)
     accounts[n]['user'] = new_user
@@ -149,6 +164,7 @@ def set_user(n, new_user):
 
 
 def get_balance(n):
+    """Get balance of account"""
     n = find(n)
     b = accounts[n]['balance']
     if float(b).is_integer():
@@ -157,11 +173,13 @@ def get_balance(n):
 
 
 def get_balance_raw(n):
+    """Get unrounded balance of account"""
     n = find(n)
     return accounts[n]['balance']
 
 
 def set_balance(n, new_balance):
+    """Set balance of account"""
     global accounts
     n = find(n)
     accounts[n]['balance'] = new_balance
@@ -169,6 +187,7 @@ def set_balance(n, new_balance):
 
 
 def mod_balance(n, mod_balance):
+    """Add to balance of account"""
     global accounts
     n = find(n)
     accounts[n]['balance'] += mod_balance
@@ -176,20 +195,14 @@ def mod_balance(n, mod_balance):
 
 
 def get_age(n):
+    """Get age of account"""
     n = find(n)
     return accounts[n]['age']
 
 
 def set_age(n, new_age):
+    """Set age of account"""
     global accounts
     n = find(n)
     accounts[n]['age'] = new_age
-    write()
-
-
-if __name__ == '__main__':
-    read()
-    print(users)
-    print(accounts['XYVN5553961'])
-    print(get_accounts())
     write()

@@ -1,4 +1,5 @@
 def uncredited(acc, ac, ci):
+    """Handle Withdrawals/Deposits"""
     make_withdrawal = make_deposit = insufficient_funds = succeeded = False
     end = ''
     while True:
@@ -32,6 +33,7 @@ def uncredited(acc, ac, ci):
 
 
 def withdraw(acc, ac, ci):
+    """Handle withdrawals"""
     cur_bal = ac.get_balance(acc)
     amt = ci.input_form("Withdraw Funds", 'n', [
                         "Amount to Withdraw:"], "Current Balance: Rs. " + str(cur_bal))[0]
@@ -47,6 +49,7 @@ def withdraw(acc, ac, ci):
 
 
 def deposit(acc, ac, ci):
+    """Handle Deposits"""
     cur_bal = ac.get_balance(acc)
     amt = ci.input_form("Deposit Funds", 'n', [
                         "Amount to Deposit:"], "Current Balance: Rs. " + str(cur_bal))[0]

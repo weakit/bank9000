@@ -43,11 +43,13 @@ if data.status_code == 200:
 
 
 def convert(frm, to, value):
+    """Convert a currency"""
     amount = value * rates[to] / rates[frm]
     return amount
 
 
 def currencies():
+    """Returns supported currencies"""
     return rates.keys()
 
 

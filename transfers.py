@@ -1,9 +1,11 @@
 def transfer(ac, frm, to, amt):
+    """Transfer an amount from one account to another"""
     ac.mod_balance(frm, -amt)
     ac.mod_balance(to, amt)
 
 
 def handle(acc, ac, ci):
+    """Handle money transfers"""
     account_not_found = False
     insufficient_funds = False
     thief = False

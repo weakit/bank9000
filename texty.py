@@ -15,11 +15,13 @@ blk = "█"
 
 
 def size(w, h):
+    """Sets terminal size to use"""
     global width, height
     width, height = w, h
 
 
 def border(w=None, h=None):
+    """Generate a border"""
     if not w or not h:
         w, h = width, height
     top = lft + (hor * (w - 2)) + rgt
@@ -30,6 +32,7 @@ def border(w=None, h=None):
 
 
 def empty(w=None, h=None):
+    """Generate an empty screen"""
     if not w or not h:
         w, h = width, height
     line = ' ' * width + '\n'
@@ -37,6 +40,11 @@ def empty(w=None, h=None):
 
 
 def overlay_line(base, line):
+    """Overlay a line over a base line
+
+    '      World ' overlayed over 'Hello ! !  !'
+    would result in 'Hello World!'
+    """
     escapes = [('', 0)]
     if '\x1b' in line:  # handling ANSI codes
         nl = ""
@@ -62,6 +70,10 @@ def overlay_line(base, line):
 
 
 def overlay(base, *layers):
+    """Overlay a screen over another.
+    
+    Pretty much the same as overlay_line but for a whole screen.
+    """
     if not layers:
         return base
     base_lines = base.split('\n')
@@ -75,6 +87,7 @@ def overlay(base, *layers):
 
 
 def ca(text, w=None):
+    """Center align text"""
     if not w:
         w = width
     text = text.split('\n')
@@ -85,14 +98,17 @@ def ca(text, w=None):
 
 
 def ra(text, sp=3, w=None):
+    """Right align text"""
     return ' ' * (width - len(text) - sp - 1) + text
 
 
 def la(text, sp=3, w=None):
+    """Left align text"""
     return ' ' * (sp + 1) + text
 
 
 def ln(string, n):
+    """Generate a screen with a string placed in a specified line"""
     if n > 0:
         if n > height - 2:
             return string  # Throw console size error

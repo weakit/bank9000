@@ -9,6 +9,7 @@ import demands
 
 
 def handle_account(acc):
+    """Handles accounts-related tasks"""
     while True:
         ch = ci.list_handler('Account ' + ac.pretty_no(acc),
                              ["Withdrawals and Deposits", "Money Transfers",
@@ -24,6 +25,7 @@ def handle_account(acc):
 
 
 def handle_currencies(*args):
+    """Handles currency-conversions"""
     supported = currencies.currencies()
     s = ["Supported Currencies:", '\n']
     st = ''
@@ -66,6 +68,7 @@ def handle_currencies(*args):
 
 
 def new_account():
+    """Handles account creation"""
     done = ask = no_pass = no_user = False
     ch = 0
     while not done:
@@ -108,6 +111,7 @@ def new_account():
 
 
 def login():
+    """Handles account logins"""
     done = non_existent = wrong_pass = False
     ch = 0
     while not done:
@@ -135,15 +139,18 @@ def login():
 
 
 def finish():
+    """Exits"""
     ci.finish()
     exit()
 
 
 def simulate_time():
+    """Handles time simulation"""
     timesim.handle(ac, ci, 9)
 
 
-if __name__ == '__main__':
+def bank():
+    """Handles initialization, and the main menu"""
     ci.init()
     ci.startup()
     opdc = {
@@ -160,3 +167,7 @@ if __name__ == '__main__':
                                   'Currency Conversions',
                                   'Exit'])
         opdc[op]()
+    
+
+if __name__ == '__main__':
+    bank()

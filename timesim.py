@@ -1,5 +1,5 @@
 def handle(ac, ci, rate):
-    """to handle and process user input"""
+    """Handle Time Simulations"""
     x = ci.input_form("Time Simulator", 'n', ["Days to Simulate:"],
                       "bank9000 offers an unbelievable interest rate of " + str(rate) + "% pa")
     simulate(ac, x[0], rate)
@@ -7,7 +7,7 @@ def handle(ac, ci, rate):
 
 
 def simulate(ac, days, rate):
-    """to simulate the passage of time"""
+    """Simulates passage of time"""
     ac.read()
     for account in ac.get_accounts():
         balance = ac.get_balance_raw(account)
@@ -19,15 +19,8 @@ def simulate(ac, days, rate):
 
 
 def db_reset(ac):
-    """to reset values in case of error"""
+    """[DO NOT USE] Reset account values. For debugging only."""
     ac.read()
     for x in ac.get_accounts():
         ac.set_balance(x, 100)
         ac.set_age(x, 0)
-
-
-if __name__ == '__main__':
-    import accounts as AC
-    simulate(AC, 30, 9)
-    db_reset(AC)
-    print(AC.accounts)
