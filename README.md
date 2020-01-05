@@ -1,4 +1,8 @@
 <img align="left" width=75% alt="Bank9000" src="https://user-images.githubusercontent.com/34541656/71777752-5d186300-2fca-11ea-9766-49d13cabc413.png">
+<br/><br/>
+<br/><br/>
+
+----
 
 [<img align="right" width="81" height="20" alt="Build Status" src="https://api.travis-ci.com/weakit/comp-project.svg?token=AzkJzGBuqpKzByqVwxUe&branch=master">](https://travis-ci.com/weakit/comp-project)
 
