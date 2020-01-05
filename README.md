@@ -8,7 +8,7 @@
                                               a bank you can trust
 ```
 
-<img align="right" width="81" height="20" src="https://api.travis-ci.com/weakit/comp-project.svg?token=AzkJzGBuqpKzByqVwxUe&branch=master">
+[<img align="right" width="81" height="20" alt="Build Status" src="https://api.travis-ci.com/weakit/comp-project.svg?token=AzkJzGBuqpKzByqVwxUe&branch=master">](https://travis-ci.com/weakit/comp-project)
 
 A simple bank management system that our team put out for school.
 
