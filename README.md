@@ -18,6 +18,7 @@ To get bank9000™ running on linux, you would also need to get [`getch`](https:
 
 Make sure to first install the required dependencies by running `pip install -r requirements.txt`.
 
-Run `python ./bank.py` in a terminal (or command prompt if on windows). Other envirnoments are not supported, and mostly will not work.
+Run `python ./bank.py` in a terminal (or command prompt if on windows). \
+Other envirnoments are not supported, and mostly will not work.
 
-Python 3 only.
+bank9000™ only runs on Python 3.
