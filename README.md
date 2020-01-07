@@ -13,3 +13,11 @@ Also features a terminal based user interface, completely written from scratch.
 
 Requires [`requests`](https://pypi.org/project/requests/) for fancy internet things, and [`colorama`](https://pypi.org/project/colorama/), because we really like colours. \
 To get bank9000™ running on linux, you would also need to get [`getch`](https://pypi.org/project/getch/).
+
+## Running bank9000™
+
+Make sure to first install the required dependencies by running `pip install -r requirements.txt`.
+
+Run `python ./bank.py` in a terminal (or command prompt if on windows). Other envirnoments are not supported, and mostly will not work.
+
+Python 3 only.
