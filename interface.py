@@ -102,7 +102,7 @@ def find_key(key):
             return 'enter'
         elif key == 27:  # esc
             return 'esc'
-        elif key == 224:  # special keys
+        elif key == 224 or key == 0:  # special keys (0 for newer terminals)
             key = ord(screen.read())  # get second char
             if key == 72:  # arrow up
                 return 'up'
