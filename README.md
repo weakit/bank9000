@@ -4,7 +4,7 @@
 
 ----
 
-[<img align="right" width="81" height="20" alt="Build Status" src="https://travis-ci.com/weakit/bank9000.svg?branch=master">](https://travis-ci.com/weakit/comp-project)
+[<img align="right" width="81" height="20" alt="Build Status" src="https://travis-ci.com/weakit/bank9000.svg?branch=master">](https://travis-ci.com/weakit/bank9000)
 
 A simple bank management system that our team put out for school.
 
