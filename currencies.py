@@ -37,9 +37,12 @@ rates = {
 }
 
 
-data = requests.get("https://api.exchangeratesapi.io/latest?base=INR")
-if data.status_code == 200:
-    rates = data.json()['rates']
+try:
+    data = requests.get("https://api.exchangeratesapi.io/latest?base=INR")
+    if data.status_code == 200:
+        rates = data.json()['rates']
+except Exception as e:  # should work on this
+    pass
 
 
 def convert(frm, to, value):
